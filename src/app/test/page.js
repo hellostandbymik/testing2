@@ -68,13 +68,14 @@ const Test = ()=>{
           ...prev,
           { id: lastId+1, task: text, completed: false },
         ]);
+        handleAddLocal(lastId,text)
         setNewTask("");
-        handleAddLocal()
     }
 
-    const handleAddLocal = ()=>{
-        localStorage.setItem("task", JSON.stringify(task));
-            setTask(JSON.parse(taskInlocal));
+    const handleAddLocal = (lastId,text)=>{
+
+        localStorage.setItem("task", JSON.stringify([...task,{ id: lastId+1, task: text, completed: false }]));
+            // setTask(JSON.parse(taskInlocal));
     }
 
     const ElementAdd = ()=>{
