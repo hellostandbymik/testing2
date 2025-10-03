@@ -63,11 +63,10 @@ const Test = ()=>{
         console.log(newTask)
         const text = newTask.trim();
 
-        let last = newTask[task.length - 1];
-        const newId = last + 1
+        const lastId = task[task.length - 1].id
         setTask((prev) => [
           ...prev,
-          { id: newId, task: text, completed: false },
+          { id: lastId+1, task: text, completed: false },
         ]);
         setNewTask("");
         handleAddLocal()
