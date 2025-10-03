@@ -31,6 +31,7 @@ const Test = ()=>{
     }
 
     const changeTextNewTask = (e)=>{
+        console.log(e.target.value)
         setNewTask(e.target.value)
     }
 
@@ -40,12 +41,11 @@ const Test = ()=>{
 
     const handleAdd = ()=>{
         console.log('adddd')
+        console.log(newTask)
         const text = newTask.trim();
-        if (text) return;
 
         let last = newTask[task.length - 1];
         const newId = last + 1
-        console.log(newId)
         setTask((prev) => [
           ...prev,
           { id: newId, task: text, completed: false },
@@ -57,7 +57,7 @@ const Test = ()=>{
 
         return(
             <>
-                <input placeholder="เพิ่ม Task ใหม่..." onChange={(e)=>{changeTextNewTask}}/>{newTask}
+                <input placeholder="เพิ่ม Task ใหม่..." value={newTask} onChange={(e)=>setNewTask(e.target.value)}/>
                 <button onClick={handleAdd}>
                 บันทึก
                 </button> | 
