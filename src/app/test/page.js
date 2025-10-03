@@ -30,6 +30,7 @@ const Test = ()=>{
             prev.filter((item) =>
             item.id != id
         ))
+        handleDeleteStorage(id)
     }
 
     const changeTextNewTask = (e)=>{
@@ -42,10 +43,20 @@ const Test = ()=>{
         item.id === id ? { ...item, completed: !item.completed } : item
         );
 
-        setTask(newData); // อัปเดต state
-        localStorage.setItem("task", JSON.stringify(newData)); // sync localStorage
+        setTask(newData)
+        localStorage.setItem("task", JSON.stringify(newData))
 
         // localStorage.setItem("task", JSON.stringify(task));
+    }
+
+    const handleDeleteStorage = (id)=>{
+        const newData = []
+        task.forEach(item => {
+            if (item.id !== id) {
+              newData.push(item)
+            }
+          });
+        localStorage.setItem("task", JSON.stringify(newData))
     }
 
     const handleAdd = ()=>{
@@ -95,11 +106,13 @@ const Test = ()=>{
         const taskInlocal = localStorage.getItem("task");
         if (!taskInlocal) {
             localStorage.setItem("task", JSON.stringify(todoTasks));
-            setTask(JSON.parse(taskInlocal));
+            setTask(todoTasks);
         }
     }, []);
 
-    console.log(newTask)
+
+    console.log(task)
+    if(!task) return
 
     return(
 
