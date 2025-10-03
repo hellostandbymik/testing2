@@ -118,13 +118,14 @@ const Test = ()=>{
 
         <>
            <h2 className="text-xl font-bold mb-4 text-center"> Todo List</h2>
-           {/* <button
-            onClick={()=>{setShowAdd(true)}}
-            className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600"
-            >
-            ➕ Add
-            </button> */}
-            <ElementAdd/>
+           
+            <input placeholder="เพิ่ม Task ใหม่..." value={newTask} onChange={(e)=>setNewTask(e.target.value)}/>
+                <button onClick={handleAdd}>
+                บันทึก
+                </button> | 
+                <button>
+                ❌
+                </button>
             <ul className="space-y-3">
                 {task.map((item) => (
                 <li
