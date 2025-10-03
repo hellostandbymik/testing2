@@ -15,11 +15,13 @@ const Test = ()=>{
     const [newTask, setNewTask] = useState('')
 
     const handleToggle = (id)=> {   
+        
         setTask((prev)=>
             prev.map((item) =>
             item.id === id ? { ...item, completed: item.completed ? false : true } : item
          )
         )
+
         handleUpdateStorage(id)
     }
 
@@ -35,12 +37,18 @@ const Test = ()=>{
         setNewTask(e.target.value)
     }
 
-    const handleUpdateStorage = ()=>{
-        localStorage.setItem("task", JSON.stringify(task));
+    const handleUpdateStorage = (id)=>{
+        const newData = task.map((item) =>
+        item.id === id ? { ...item, completed: !item.completed } : item
+        );
+
+        setTask(newData); // อัปเดต state
+        localStorage.setItem("task", JSON.stringify(newData)); // sync localStorage
+
+        // localStorage.setItem("task", JSON.stringify(task));
     }
 
     const handleAdd = ()=>{
-        console.log('adddd')
         console.log(newTask)
         const text = newTask.trim();
 
@@ -51,6 +59,12 @@ const Test = ()=>{
           { id: newId, task: text, completed: false },
         ]);
         setNewTask("");
+        handleAddLocal()
+    }
+
+    const handleAddLocal = ()=>{
+        localStorage.setItem("task", JSON.stringify(task));
+            setTask(JSON.parse(taskInlocal));
     }
 
     const ElementAdd = ()=>{
